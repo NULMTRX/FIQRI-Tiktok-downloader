@@ -119,6 +119,255 @@
             transition: all 0.3s ease;
         }
 
+        .btn-video { background: linear-gradient(135deg, var(--accent-green), #008a39); box-shadow: 0 4px 15px rgba(0, 200, 83, 0.2); }
+        .btn-audio { background: linear-gradient(135deg, var(--accent-blue), #1565c0); box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2); }
+        .btn-slide { background: linear-gradient(135deg, var(--accent-orange), #e65100); box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2); }
+
+        .download button:hover { transform: scale(1.03); filter: saturate(1.2); }
+
+        .loading { display: none; margin-top: 25px; }
+        .loader {
+            border: 4px solid rgba(255,255,255,0.05);
+            border-top: 4px solid var(--tiktok-red);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            margin: auto;
+        }
+
+        .progress {
+            margin-top: 25px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--tiktok-red), var(--tiktok-cyan));
+            transition: width 0.5s ease;
+        }
+
+        .msg { margin-top: 15px; font-size: 14px; color: #94a3b8; font-weight: 500; }
+
+        /* MODAL GALERI */
+        #galleryOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 9999; overflow-y: auto; padding: 20px;
+        }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px; max-width: 800px; margin: 50px auto;
+        }
+        .gallery-grid img { width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); }
+
+        .footer {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+        }
+
+        .dev-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 16px;
+            border-radius: 100px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .dev-name span { color: var(--tiktok-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
+        .verified-icon { color: #3b82f6; }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="color: var(--tiktok-red); margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,0,80,0.5));">
+        <i data-lucide="shield-check" size="40"></i>
+    </div>
+    <h2>Download TikTok PRO</h2>
+
+    <div class="input-wrapper">
+        <input id="url" placeholder="Tempel tautan video di sini">
+    </div>
+
+    <button id="mainActionBtn" onclick="start()">
+        <i data-lucide="download"></i> Download Sekarang
+    </button>
+
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+
+    <div id="capBox" style="display:none; background:rgba(255,255,255,0.05); padding:12px; border-radius:12px; margin-top:15px; font-size:13px; text-align:left; border-left:3px solid var(--tiktok-red);">
+        <b style="color:var(--tiktok-cyan)">Caption:</b> <span id="capText" style="color:#e2e8f0; line-height:1.4;"></span>
+    </div>
+
+    <div class="msg" id="msg">Sistem siap digunakan</div>
+
+    <div class="download" id="buttons">
+        <a id="videoLink" target="_blank" style="text-decoration:none">
+            <button class="btn-video"><i data-lucide="video"></i> Simpan Video</button>
+        </a>
+        <a id="audioLink" target="_blank" style="text-decoration:none">
+            <button class="btn-audio"><i data-lucide="music"></i> Simpan MP3</button>
+        </a>
+        <a id="galleryLink" style="text-decoration:none; display:none; cursor:pointer;" onclick="openGal()">
+            <button class="btn-slide"><i data-lucide="image"></i> Buka Galeri Foto</button>
+        </a>
+
+        <button onclick="location.reload()" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); margin-top:10px; font-size:12px; color:#94a3b8;">
+            <i data-lucide="refresh-cw" size="14"></i> Coba Link Lain
+        </button>
+    </div>
+
+    <div class="footer">
+        <div class="dev-name">
+            <i data-lucide="code-2" size="16"></i>
+            Developer: <span>FIQRI</span>
+            <i data-lucide="badge-check" size="16" class="verified-icon"></i>
+        </div>
+        <div style="opacity: 0.4; margin-top: 10px; font-size: 11px;">&copy; 2026 NULMATRIX System v2.0</div>
+    </div>
+</div>
+
+<div id="galleryOverlay">
+    <div style="text-align:center; position:sticky; top:0; background:rgba(0,0,0,0.8); padding:20px; z-index:10;">
+        <button onclick="closeGal()" style="padding:10px 25px; background:var(--tiktok-red); border:none; color:white; border-radius:12px; cursor:pointer; font-weight:bold;">Tutup Galeri</button>
+    </div>
+    <div class="gallery-grid" id="galleryContent"></div>
+</div>
+
+<script>
+lucide.createIcons();
+
+const bar=document.getElementById("bar");
+const msg=document.getElementById("msg");
+const loading=document.getElementById("loading");
+const buttons=document.getElementById("buttons");
+const videoLink=document.getElementById("videoLink");
+const audioLink=document.getElementById("audioLink");
+const galleryLink=document.getElementById("galleryLink");
+const urlInput=document.getElementById("url");
+const mainBtn=document.getElementById("mainActionBtn");
+
+let listFoto = [];
+
+document.addEventListener("paste",e=>{
+    let text=(e.clipboardData||window.clipboardData).getData("text");
+    if(text.includes("tiktok.com")){ urlInput.value=text; }
+});
+
+function progress(p,t){
+    bar.style.width=p+"%";
+    msg.innerText=t;
+}
+
+function valid(url){ return url.includes("tiktok.com"); }
+
+const APIs=[
+    async function(url){
+        let r=await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`);
+        let d=await r.json();
+        return{ video: d.data.play, audio: d.data.music, images: d.data.images, title: d.data.title };
+    }
+];
+
+async function start(){
+    let url=urlInput.value.trim();
+    buttons.style.display="none";
+    document.getElementById("capBox").style.display="none";
+    galleryLink.style.display="none";
+    
+    if(!valid(url)){ msg.innerText="Tautan tidak didukung!"; return; }
+    loading.style.display="block";
+    progress(20,"Menghubungkan ke API...");
+    
+    for(let api of APIs){
+        try{
+            progress(60,"Menguraikan media...");
+            let data=await api(url);
+            if(data.video || data.images){
+                progress(100,"Berhasil!");
+                
+                if(data.title) {
+                    document.getElementById("capBox").style.display = "block";
+                    document.getElementById("capText").innerText = data.title;
+                }
+
+                if(data.images && data.images.length > 0) {
+                    listFoto = data.images;
+                    galleryLink.style.display = "block";
+                    videoLink.style.display = "none";
+                    audioLink.style.display = "none";
+                } else {
+                    galleryLink.style.display = "none";
+                    videoLink.style.display = "block";
+                    videoLink.href=data.video;
+                    if(data.audio){ audioLink.href=data.audio; audioLink.style.display="block" }else{ audioLink.style.display="none" }
+                }
+
+                mainBtn.style.display = "none";
+                buttons.style.display = "flex";
+                loading.style.display = "none";
+                return;
+            }
+        }catch(e){ console.log("Gagal, mencoba server..."); }
+    }
+    loading.style.display="none";
+    msg.innerText="Gagal mengunduh.";
+}
+
+function openGal() {
+    const cont = document.getElementById("galleryContent");
+    cont.innerHTML = "";
+    listFoto.forEach((img, i) => {
+        cont.innerHTML += `
+            <div style="text-align:center; background:rgba(255,255,255,0.05); padding:10px; border-radius:15px;">
+                <img src="${img}">
+                <a href="${img}" download="TikTok_Photo_${i+1}.jpg" target="_blank" style="display:block; margin-top:10px; color:var(--tiktok-cyan); font-size:12px; text-decoration:none; font-weight:bold; background:rgba(0,242,255,0.1); padding:5px; border-radius:5px;">
+                   <i data-lucide="download" size="12"></i> Download #${i+1}
+                </a>
+            </div>`;
+    });
+    lucide.createIcons(); 
+    document.getElementById("galleryOverlay").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closeGal() { 
+    document.getElementById("galleryOverlay").style.display = "none"; 
+    document.body.style.overflow = "auto";
+}
+</script>
+</body>
+</html>
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
         .btn-video { 
             background: linear-gradient(135deg, var(--accent-green), #008a39); 
             box-shadow: 0 4px 15px rgba(0, 200, 83, 0.2);
