@@ -21,6 +21,7 @@
             font-family: 'Inter', -apple-system, sans-serif;
             color: white;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -181,6 +182,15 @@
             color: #94a3b8;
             font-weight: 600;
         }
+        
+        .banner-gif{
+    width:97%;
+    max-width:100%;
+    border-radius:20px;
+    border:3px solid rgba(255,255,255,0.15);
+    box-shadow:0 0 15px rgba(0,242,255,0.3);
+    margin-bottom:15px;
+}
 
         .dev-name span { color: var(--tiktok-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
         .verified-icon { color: #3b82f6; }
@@ -189,7 +199,7 @@
     </style>
 </head>
 <body>
-
+<img src="anime.gif" class="banner-gif">
 <div class="container">
     <div style="color: var(--tiktok-red); margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,0,80,0.5));">
         <i data-lucide="shield-check" size="40"></i>
