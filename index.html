@@ -310,24 +310,27 @@ async function start(){
         try{
             progress(60,"Menguraikan media...");
             let data=await api(url);
-            if(data.video || data.images){
+            if(data.video || (data.images && data.images.length > 0)){
                 progress(100,"Berhasil!");
                 
                 if(data.title) {
                     document.getElementById("capBox").style.display = "block";
                     document.getElementById("capText").innerText = data.title;
                 }
-
                 if(data.images && data.images.length > 0) {
                     listFoto = data.images;
                     galleryLink.style.display = "block";
                     videoLink.style.display = "none";
-                    audioLink.style.display = "none";
                 } else {
                     galleryLink.style.display = "none";
                     videoLink.style.display = "block";
                     videoLink.href=data.video;
-                    if(data.audio){ audioLink.href=data.audio; audioLink.style.display="block" }else{ audioLink.style.display="none" }
+                }
+                if(data.audio){ 
+                    audioLink.href=data.audio; 
+                    audioLink.style.display="block";
+                } else { 
+                    audioLink.style.display="none";
                 }
 
                 mainBtn.style.display = "none";
@@ -340,6 +343,7 @@ async function start(){
     loading.style.display="none";
     msg.innerText="Gagal mengunduh.";
 }
+
 
 function openGal() {
     const cont = document.getElementById("galleryContent");
