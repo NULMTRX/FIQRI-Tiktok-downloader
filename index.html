@@ -18,6 +18,9 @@
 
         body {
             background: radial-gradient(circle at center, #1a1e2e 0%, #060910 100%);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             font-family: 'Inter', -apple-system, sans-serif;
             color: white;
             display: flex;
@@ -26,25 +29,41 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            transition: background 0.5s ease;
         }
         .container {
-            width: 100%;
-            max-width: 420px;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            width: 85%;
+            max-width: 340px; 
+            background: rgba(15, 23, 42, 0.68); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 28px;
-            padding: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 
-                        inset 0 1px 1px rgba(255, 255, 255, 0.05);
+            padding: 30px 25px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
             text-align: center;
             margin: 15px;
+            z-index: 2;
+        }
+        @media (min-width: 768px) {
+            body {
+                background-image: url('anime.gif');
+            }
+            .banner-gif {
+                display: none;
+            }
+            .container {
+                max-width: 350px; 
+                background: rgba(10, 15, 30, 0.32); 
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+            }
         }
 
         h2 {
-            margin-bottom: 30px;
-            font-size: 24px;
+            margin-bottom: 25px;
+            font-size: 20px;
             font-weight: 800;
             letter-spacing: -0.5px;
             background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
@@ -56,15 +75,15 @@
 
         input {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             border: 2px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
+            border-radius: 14px;
             background: rgba(0, 0, 0, 0.4);
             color: white;
             outline: none;
             box-sizing: border-box;
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -76,13 +95,13 @@
 
         #mainActionBtn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             border: none;
-            border-radius: 16px;
+            border-radius: 14px;
             background: linear-gradient(135deg, var(--tiktok-red) 0%, #90002d 100%);
             color: white;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -102,14 +121,14 @@
             margin-top: 25px;
             display: none;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .download button {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             color: white;
             font-weight: 600;
             cursor: pointer;
@@ -118,6 +137,7 @@
             justify-content: center;
             gap: 10px;
             transition: all 0.3s ease;
+            font-size: 14px;
         }
 
         .btn-video { background: linear-gradient(135deg, var(--accent-green), #008a39); box-shadow: 0 4px 15px rgba(0, 200, 83, 0.2); }
@@ -131,15 +151,15 @@
             border: 4px solid rgba(255,255,255,0.05);
             border-top: 4px solid var(--tiktok-red);
             border-radius: 50%;
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
             margin: auto;
         }
 
         .progress {
-            margin-top: 25px;
-            height: 8px;
+            margin-top: 20px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             overflow: hidden;
@@ -152,45 +172,45 @@
             transition: width 0.5s ease;
         }
 
-        .msg { margin-top: 15px; font-size: 14px; color: #94a3b8; font-weight: 500; }
+        .msg { margin-top: 15px; font-size: 13px; color: #94a3b8; font-weight: 500; }
 
-        /* MODAL GALERI */
         #galleryOverlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 9999; overflow-y: auto; padding: 20px;
         }
         .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px; max-width: 800px; margin: 50px auto;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px; max-width: 800px; margin: 50px auto;
         }
         .gallery-grid img { width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); }
 
         .footer {
-            margin-top: 35px;
-            padding-top: 25px;
+            margin-top: 25px;
+            padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .dev-name {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 100px;
             color: #94a3b8;
             font-weight: 600;
+            font-size: 11px;
         }
         
-        .banner-gif{
-    width:97%;
-    max-width:100%;
-    border-radius:20px;
-    border:3px solid rgba(255,255,255,0.15);
-    box-shadow:0 0 15px rgba(0,242,255,0.3);
-    margin-bottom:15px;
-}
+        .banner-gif {
+            width: 85%;
+            max-width: 340px;
+            border-radius: 18px;
+            border: 2px solid rgba(255,255,255,0.15);
+            box-shadow: 0 0 15px rgba(0,242,255,0.2);
+            margin-bottom: 15px;
+        }
 
         .dev-name span { color: var(--tiktok-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
         .verified-icon { color: #3b82f6; }
@@ -201,8 +221,8 @@
 <body>
 <img src="anime.gif" class="banner-gif">
 <div class="container">
-    <div style="color: var(--tiktok-red); margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,0,80,0.5));">
-        <i data-lucide="shield-check" size="40"></i>
+    <div style="color: var(--tiktok-red); margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(255,0,80,0.4));">
+        <i data-lucide="shield-check" size="32"></i>
     </div>
     <h2>Download TikTok PRO</h2>
 
@@ -222,7 +242,7 @@
         <div class="bar" id="bar"></div>
     </div>
 
-    <div id="capBox" style="display:none; background:rgba(255,255,255,0.05); padding:12px; border-radius:12px; margin-top:15px; font-size:13px; text-align:left; border-left:3px solid var(--tiktok-red);">
+    <div id="capBox" style="display:none; background:rgba(255,255,255,0.05); padding:10px; border-radius:12px; margin-top:15px; font-size:12px; text-align:left; border-left:3px solid var(--tiktok-red);">
         <b style="color:var(--tiktok-cyan)">Caption:</b> <span id="capText" style="color:#e2e8f0; line-height:1.4;"></span>
     </div>
 
@@ -239,18 +259,18 @@
             <button class="btn-slide"><i data-lucide="image"></i> Buka Galeri Foto</button>
         </a>
 
-        <button onclick="location.reload()" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); margin-top:10px; font-size:12px; color:#94a3b8;">
-            <i data-lucide="refresh-cw" size="14"></i> Coba Link Lain
+        <button onclick="location.reload()" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); margin-top:10px; font-size:11px; color:#94a3b8;">
+            <i data-lucide="refresh-cw" size="12"></i> Coba Link Lain
         </button>
     </div>
 
     <div class="footer">
         <div class="dev-name">
-            <i data-lucide="code-2" size="16"></i>
+            <i data-lucide="code-2" size="14"></i>
             Developer: <span>FIQRI</span>
-            <i data-lucide="badge-check" size="16" class="verified-icon"></i>
+            <i data-lucide="badge-check" size="14" class="verified-icon"></i>
         </div>
-        <div style="opacity: 0.4; margin-top: 10px; font-size: 11px;">&copy; 2026 NULMATRIX System v2.0</div>
+        <div style="opacity: 0.4; margin-top: 8px; font-size: 10px;">&copy; 2026 NULMATRIX System v2.0</div>
     </div>
 </div>
 
@@ -343,7 +363,6 @@ async function start(){
     loading.style.display="none";
     msg.innerText="Gagal mengunduh.";
 }
-
 
 function openGal() {
     const cont = document.getElementById("galleryContent");
